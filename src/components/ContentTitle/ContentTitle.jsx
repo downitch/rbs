@@ -7,7 +7,7 @@ const PageTitle = styled.div`
 `;
 
 const PageTitleSpan = styled.span`
-    font-size: 38pt;
+    font-size: 35pt;
 `;
 
 const ContentTitle = ({ name }) => {

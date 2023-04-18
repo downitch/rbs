@@ -25,7 +25,12 @@ const HeaderContent = styled.div`
 
 const Header = () => {
   const checkIfAuthorized = () => {
-    if (window.localStorage.getItem('rbs_login_hash') == null) return false;
+    if (window.localStorage.getItem('rbs_login_hash') != null) return true;
+    return false;
+  };
+
+  const checkIfStaffMember = () => {
+    if (window.localStorage.getItem('rbs_role_hash') == null) return false;
     return true;
   };
 
@@ -33,7 +38,7 @@ const Header = () => {
     <HeaderWrap>
       <HeaderContent>
         <p>UOW Room Booking System</p>
-        <p>{checkIfAuthorized() ? `(Staff)` : `Log in`}</p>
+        <p>{checkIfAuthorized() ? (checkIfStaffMember() ? `Staff` : `Student`) : ''}</p>
       </HeaderContent>
     </HeaderWrap>
   );
