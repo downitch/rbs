@@ -23,25 +23,16 @@ const Block = styled.div`
     justify-content: center;
 `;
 
-const checkIfAuthorized = () => {
-  console.log('checking...');
-  if (window.localStorage.getItem('rbs_login_hash') != null) return true;
-  return false;
-};
-
-const Home = () => {
+const Login = () => {
   return (
     <Wrap>
       <Header />
-      {checkIfAuthorized ? <Block>
-        <ContenTitle name="Available Rooms" />
-        <RoomBlock name="Name of the Room" price="0$" cap="12" date="22.04.2023" time="10:00-11:00" />
-      </Block> : <Block>
+      <Block>
         <ContenTitle name="Login Page" />
         <RoomBlock name="Name of the Room" price="0$" cap="12" date="22.04.2023" time="10:00-11:00" />
-      </Block>}
+      </Block>
     </Wrap>
   );
 };
 
-export default Home;
+export default Login;

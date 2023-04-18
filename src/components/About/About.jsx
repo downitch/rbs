@@ -46,17 +46,17 @@ const Table = styled.div`
 `;
 
 const About = () => {
-    return(
-        <Wrap>
-            <Header>
-                <HeaderContent>
-                    <p>(Staff)</p>
-                </HeaderContent>
-            </Header>
-            <Table>
-            </Table>
-        </Wrap>
-    );
+  return (
+    <Wrap>
+      <Header>
+        <HeaderContent>
+          <p>(Staff)</p>
+        </HeaderContent>
+      </Header>
+      <Table>
+      </Table>
+    </Wrap>
+  );
 };
 
 export default About;

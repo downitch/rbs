@@ -24,19 +24,19 @@ const HeaderContent = styled.div`
 `;
 
 const Header = () => {
-    const checkIfAuthorized = () => {
-        if(window.localStorage.getItem('rbs_login_hash') == null) return false;
-        return true;
-    };
+  const checkIfAuthorized = () => {
+    if (window.localStorage.getItem('rbs_login_hash') == null) return false;
+    return true;
+  };
 
-    return(
-        <HeaderWrap>
-            <HeaderContent>
-                <p>UOW Room Booking System</p>
-                <p>{ checkIfAuthorized() ? `(Staff)` : `Log in` }</p>
-            </HeaderContent>
-        </HeaderWrap>
-    );
+  return (
+    <HeaderWrap>
+      <HeaderContent>
+        <p>UOW Room Booking System</p>
+        <p>{checkIfAuthorized() ? `(Staff)` : `Log in`}</p>
+      </HeaderContent>
+    </HeaderWrap>
+  );
 };
 
 export default Header;

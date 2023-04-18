@@ -24,27 +24,27 @@ const TableTD = styled.td`
     border: 1px solid black;
 `;
 
-const RoomBlock = ({name, price, cap, date, time}) => {
-    return(
-        <Content>
-            <AvailableList>
-                <TableTR>
-                    <TableTH>Room No.:</TableTH>
-                    <TableTH>Price/hr:</TableTH>
-                    <TableTH>Capacity:</TableTH>
-                    <TableTH>Date:</TableTH>
-                    <TableTH>Time:</TableTH>
-                </TableTR>
-                <TableTR>
-                    <TableTD>{name}</TableTD>
-                    <TableTD>{price}</TableTD>
-                    <TableTD>{cap}</TableTD>
-                    <TableTD>{date}</TableTD>
-                    <TableTD>{time}</TableTD>
-                </TableTR>
-            </AvailableList>
-        </Content>
-    );
+const RoomBlock = ({ name, price, cap, date, time }) => {
+  return (
+    <Content>
+      <AvailableList>
+        <TableTR>
+          <TableTH>Room No.:</TableTH>
+          <TableTH>Price/hr:</TableTH>
+          <TableTH>Capacity:</TableTH>
+          <TableTH>Date:</TableTH>
+          <TableTH>Time:</TableTH>
+        </TableTR>
+        <TableTR>
+          <TableTD>{name}</TableTD>
+          <TableTD>{price}</TableTD>
+          <TableTD>{cap}</TableTD>
+          <TableTD>{date}</TableTD>
+          <TableTD>{time}</TableTD>
+        </TableTR>
+      </AvailableList>
+    </Content>
+  );
 };
 
 export default RoomBlock;

@@ -15,12 +15,12 @@ const Table = styled.div`
     margin-bottom: 30px;
 `;
 
-const Content = ({children}) => {
-    return(
-        <Table>
-            {children}
-        </Table>
-    );
+const Content = ({ children }) => {
+  return (
+    <Table>
+      {children}
+    </Table>
+  );
 };
 
 export default Content;

@@ -10,14 +10,14 @@ const PageTitleSpan = styled.span`
     font-size: 38pt;
 `;
 
-const ContentTitle = ({name}) => {
-    return(
-        <PageTitle>
-            <PageTitleSpan>
-                {name}
-            </PageTitleSpan>
-        </PageTitle>
-    );
+const ContentTitle = ({ name }) => {
+  return (
+    <PageTitle>
+      <PageTitleSpan>
+        {name}
+      </PageTitleSpan>
+    </PageTitle>
+  );
 };
 
 export default ContentTitle;
