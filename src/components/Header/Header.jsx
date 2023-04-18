@@ -23,6 +23,10 @@ const HeaderContent = styled.div`
     padding: 10px 15px;
 `;
 
+const LogoutButton = styled.p`
+  cursor: pointer;
+`;
+
 const Header = () => {
   const checkIfAuthorized = () => {
     if (window.localStorage.getItem('rbs_login_hash') != null) return true;
@@ -30,15 +34,21 @@ const Header = () => {
   };
 
   const checkIfStaffMember = () => {
-    if (window.localStorage.getItem('rbs_role_hash') == null) return false;
-    return true;
+    if (window.localStorage.getItem('rbs_role_hash') == 'staff') return true;
+    return false;
   };
+
+  const logout = () => {
+    window.localStorage.removeItem('rbs_login_hash');
+    window.localStorage.removeItem('rbs_role_hash');
+    window.location.reload(false);
+  }
 
   return (
     <HeaderWrap>
       <HeaderContent>
         <p>UOW Room Booking System</p>
-        <p>{checkIfAuthorized() ? (checkIfStaffMember() ? `Staff` : `Student`) : ''}</p>
+        <LogoutButton onClick={ logout }>{checkIfAuthorized() ? (checkIfStaffMember() ? `Staff` : `Student`) : ''}</LogoutButton>
       </HeaderContent>
     </HeaderWrap>
   );

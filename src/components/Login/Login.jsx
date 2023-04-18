@@ -36,12 +36,13 @@ const SwitchRole = styled.div`
   width: 80%;
   height: 30px;
   border-radius: 7px;
-  background: gray;
+  background: #989898;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   color: white;
+  margin-bottom: 20px;
 `;
 
 const LeftRole = styled.div`
@@ -68,6 +69,61 @@ const RightRole = styled.div`
   cursor: pointer;
 `;
 
+const InputBlock = styled.div`
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-bottom: 20px;
+`;
+
+const InputHeader = styled.h2`
+  color: #001641;
+  padding-bottom: 0;
+  margin-bottom: 0;
+`;
+
+const InputInteractive = styled.input`
+  background: #989898;
+  border: none;
+  padding: 5px 2%;
+  width: 96%;
+  font-size: 14pt;
+  color: white;
+  border-radius: 3px;
+  outline: none;
+
+  &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 1; /* Firefox */
+  }
+
+  &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: white;
+  }
+
+  &::-ms-input-placeholder { /* Microsoft Edge */
+    color: white;
+  }
+`;
+
+const InputButton = styled.div`
+  width: 40%;
+  margin-left: 30%;
+  margin-top: 30px;
+  background: #001641;
+  outline: none;
+  border: none;
+  padding: 12px 0;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+`;
+
 const Login = () => {
 
   const [active, setActive] = useState(true);
@@ -84,6 +140,12 @@ const Login = () => {
     if(active) switchRoleClick();
   }
 
+  const authUser = () => {
+    window.localStorage.setItem('rbs_login_hash', 'login_hash');
+    window.localStorage.setItem('rbs_role_hash', (active ? 'student' : 'staff'));
+    window.location.reload(false);
+  }
+
   return (
     <Wrap>
       <Header />
@@ -98,7 +160,23 @@ const Login = () => {
               Staff
             </RightRole>
           </SwitchRole>
-
+          <InputBlock>
+            <InputHeader>
+              Username:
+            </InputHeader>
+            <InputInteractive placeholder='username' />
+          </InputBlock>
+          <InputBlock>
+            <InputHeader>
+              Password:
+            </InputHeader>
+            <InputInteractive placeholder='password' />
+          </InputBlock>
+          <InputBlock>
+            <InputButton onClick={ authUser }>
+              Continue
+            </InputButton>
+          </InputBlock>
         </LoginWindow>
       </Block>
     </Wrap>
