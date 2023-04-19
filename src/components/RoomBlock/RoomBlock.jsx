@@ -47,7 +47,13 @@ const DefaultButton = styled.div`
   margin-right: 15px;
 `;
 
-const RoomBlock = ({ name, price, cap, date, time }) => {
+const RoomBlock = ({ id, name, price, cap, date, time }) => {
+
+  const removeRoom = id => {
+    window.localStorage.setItem('rooms', JSON.stringify(JSON.parse(window.localStorage.getItem('rooms')).filter(e => e.id != id)));
+    window.location.reload(false);
+  }
+
   return (
     <Content>
       <AvailableList>
@@ -67,7 +73,7 @@ const RoomBlock = ({ name, price, cap, date, time }) => {
         </TableTR>
       </AvailableList>
       <BottomDiv>
-      { checkIfStaffMember() ? <><DefaultButton> Edit </DefaultButton><DefaultButton> Remove </DefaultButton></> : <DefaultButton> Book </DefaultButton> }
+      { checkIfStaffMember() ? <><DefaultButton> Edit </DefaultButton><DefaultButton onClick={ () => removeRoom(id) } > Remove </DefaultButton></> : <DefaultButton> Book </DefaultButton> }
       </BottomDiv>
     </Content>
   );

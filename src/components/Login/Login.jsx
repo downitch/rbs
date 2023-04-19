@@ -140,10 +140,22 @@ const Login = () => {
     if(active) switchRoleClick();
   };
 
+  const randomizePrice = () => {
+    return Math.floor(Math.random() * 14) + 10;
+  }
+
+  const rooms = [
+    {id: 3, name: "A2.1.02", price: randomizePrice(), cap: 10, date: "30/04/2023", time: "10AM-11AM"},
+    {id: 2, name: "B4.4.15", price: randomizePrice(), cap: 36, date: "28/04/2023", time: "11AM-12PM"},
+    {id: 1, name: "CB1.2.03", price: randomizePrice(), cap: 7, date: "20/04/2023", time: "11AM-12PM"}
+  ];
+
   const authUser = () => {
     window.localStorage.setItem('rbs_login_hash', 'login_hash');
     window.localStorage.setItem('rbs_role_hash', (active ? 'student' : 'staff'));
-    window.location.reload(false);
+    console.log(window.localStorage.getItem('rooms'));
+    if(!window.localStorage.getItem('rooms') || (window.localStorage.getItem('rooms') && window.localStorage.getItem('rooms') == '[]')) window.localStorage.setItem('rooms', JSON.stringify(rooms));
+    window.location.href = '/';
   };
 
   return (

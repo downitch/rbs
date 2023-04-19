@@ -11,5 +11,5 @@ export const checkIfAuthorized = () => {
 export const logout = () => {
   window.localStorage.removeItem('rbs_login_hash');
   window.localStorage.removeItem('rbs_role_hash');
-  window.location.reload(false);
+  window.location.href = '/';
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -86,41 +86,90 @@ const InputButton = styled.div`
 `;
 
 const Create = () => {
+
+  const [number, setNumber] = useState('');
+  const [price, setPrice] = useState(0);
+  const [cap, setCap] = useState(1);
+  const [date, setDate] = useState(null);
+  const [time, setTime] = useState(null);
+  const [promo, setPromo] = useState('');
+
+  const handleNumber = e => {
+    setNumber(e.target.value);
+  }
+
+  const handlePrice = e => {
+    setPrice(e.target.value);
+  }
+
+  const handleCap = e => {
+    setCap(e.target.value);
+  }
+
+  const handleDate = e => {
+    setDate(e.target.value);
+  }
+
+  const handleTime = e => {
+    setTime(e.target.value);
+  }
+
+  const handlePromo = e => {
+    setPromo(e.target.value);
+  }
+
+  const handleSubmit = () => {
+    if(number != '' && price > 0 && date && time) {
+      const arr = JSON.parse(window.localStorage.getItem('rooms'));
+      arr.sort(function(a, b) {
+        const keyA = a.id;
+        const keyB = b.id;
+        if (keyA < keyB) return -1;
+        if (keyA > keyB) return 1;
+        return 0;
+      });
+      const lid = arr[arr.length - 1].id;
+      console.log(lid);
+      window.localStorage.setItem('rooms', JSON.stringify([{id: lid + 1, name: number, price: price, cap: cap, date: date, time: time}, ...arr.reverse()]));
+      window.location.href = '/';
+    }
+  }
+
   return (
     <Wrap>
       <Header />
       <Block>
         <ContenTitle name="Create" />
         <CreateWindow>
-            <InputBox>
-                <InputTitle>Room No.: </InputTitle>
-                <InputInteractive type="text" />
-            </InputBox>
-            <InputBox>
-                <InputTitle>Price/hr: </InputTitle>
-                <InputInteractive type="text" />
-            </InputBox>
-            <InputBox>
-                <InputTitle>Capacity: </InputTitle>
-                <InputInteractive type="text" />
-            </InputBox>
-            <InputBox>
-                <InputTitle>Date: </InputTitle>
-                <InputInteractive type="text" />
-            </InputBox>
-            <InputBox>
-                <InputTitle>Timeslot: </InputTitle>
-                <InputInteractive type="text" />
-            </InputBox>
-            <InputBox>
-                <InputTitle>Promocode: </InputTitle>
-                <InputInteractive type="text" />
-            </InputBox>
-            <hr style={{ width: "65%", marginTop: "20px" }} />
-            <InputButton>
-                Create
-            </InputButton>
-            <Link to="/">Back</Link>
+          <InputBox>
+            <InputTitle>Room No.: </InputTitle>
+            <InputInteractive type="text" onChange={ handleNumber } />
+          </InputBox>
+          <InputBox>
+            <InputTitle>Price/hr: </InputTitle>
+            <InputInteractive type="text" onChange={ handlePrice } />
+          </InputBox>
+          <InputBox>
+            <InputTitle>Capacity: </InputTitle>
+            <InputInteractive type="text" onChange={ handleCap } />
+          </InputBox>
+          <InputBox>
+            <InputTitle>Date: </InputTitle>
+            <InputInteractive type="text" placeholder="DD/MM/YYYY" onChange={ handleDate } />
+          </InputBox>
+          <InputBox>
+            <InputTitle>Timeslot: </InputTitle>
+            <InputInteractive type="text" placeholder="HH AM/PM - HH AM/PM" onChange={ handleTime } />
+          </InputBox>
+          <InputBox>
+            <InputTitle>Promocode: </InputTitle>
+            <InputInteractive type="text" onChange={ handlePromo } />
+          </InputBox>
+          <hr style={{ width: "65%", marginTop: "20px" }} />
+          <InputButton onClick={ handleSubmit }>
+            Create
+          </InputButton>
+          <Link to="/">Back</Link>
         </CreateWindow>
       </Block>
     </Wrap>
