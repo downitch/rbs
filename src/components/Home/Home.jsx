@@ -7,11 +7,11 @@ import RoomBlock from '../RoomBlock/RoomBlock.jsx';
 
 const Wrap = styled.div`
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 `;
 
 const Block = styled.div`
@@ -21,6 +21,7 @@ const Block = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: 200px;
 `;
 
 const Home = () => {
@@ -29,7 +30,11 @@ const Home = () => {
       <Header />
       <Block>
         <ContenTitle name="Available Rooms" />
-        <RoomBlock name="Name of the Room" price="0$" cap="12" date="22.04.2023" time="10:00-11:00" />
+        <RoomBlock name="Name of the Room" price="0" cap="12" date="22.04.2023" time="10:00-11:00" />
+        <RoomBlock name="Name of the Room" price="0" cap="12" date="22.04.2023" time="10:00-11:00" />
+        <RoomBlock name="Name of the Room" price="0" cap="12" date="22.04.2023" time="10:00-11:00" />
+        <RoomBlock name="Name of the Room" price="0" cap="12" date="22.04.2023" time="10:00-11:00" />
+        <RoomBlock name="Name of the Room" price="0" cap="12" date="22.04.2023" time="10:00-11:00" />
       </Block>
     </Wrap>
   );

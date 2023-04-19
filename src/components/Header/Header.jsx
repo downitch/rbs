@@ -34,7 +34,7 @@ const Header = () => {
   };
 
   const checkIfStaffMember = () => {
-    if (window.localStorage.getItem('rbs_role_hash') == 'staff') return true;
+    if (window.localStorage.getItem('rbs_role_hash') === 'staff') return true;
     return false;
   };
 
