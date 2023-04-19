@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Header from '../Header/Header.jsx';
@@ -25,6 +26,20 @@ const Block = styled.div`
     margin-top: 200px;
 `;
 
+const HeaderBlock = styled.div`
+  width: 98%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const HeaderLink = styled(Link)`
+  color: white;
+  underline: none;
+  text-decoration: none;
+`;
+
 const Home = () => {
 
   const [data, setData] = useState(null);
@@ -45,7 +60,10 @@ const Home = () => {
     <Wrap>
       <Header />
       <Block>
-        <ContenTitle name={ checkIfStaffMember() ? "My Rooms" : "Available Rooms" } />
+        <HeaderBlock>
+          <ContenTitle name={ checkIfStaffMember() ? "My Rooms" : "Available Rooms" } />
+          { checkIfStaffMember() && <HeaderLink to="/create">Create</HeaderLink> }
+        </HeaderBlock>
         { data && data.map(d => <RoomBlock name={d.name} price={d.price} cap={d.cap} date={d.date} time={d.time} />)}
       </Block>
     </Wrap>

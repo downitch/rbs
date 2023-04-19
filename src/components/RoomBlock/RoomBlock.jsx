@@ -5,7 +5,7 @@ import Content from '../Content/Content.jsx';
 import { checkIfStaffMember } from '../../misc/helpers.js';
 
 const AvailableList = styled.table`
-    width: 100%;
+    width: 94%;
     border-collapse: collapse;
     cellspacing: 0;
     margin-bottom: 50px;
