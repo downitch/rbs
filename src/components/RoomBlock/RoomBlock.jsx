@@ -54,6 +54,8 @@ const RoomBlock = ({ id, name, price, cap, date, time }) => {
     window.location.reload(false);
   }
 
+  const editRoom = id => window.location.href = `/edit/${id}`;
+
   return (
     <Content>
       <AvailableList>
@@ -73,7 +75,7 @@ const RoomBlock = ({ id, name, price, cap, date, time }) => {
         </TableTR>
       </AvailableList>
       <BottomDiv>
-      { checkIfStaffMember() ? <><DefaultButton> Edit </DefaultButton><DefaultButton onClick={ () => removeRoom(id) } > Remove </DefaultButton></> : <DefaultButton> Book </DefaultButton> }
+      { checkIfStaffMember() ? <><DefaultButton onClick={ () => editRoom(id) }> Edit </DefaultButton><DefaultButton onClick={ () => removeRoom(id) } > Remove </DefaultButton></> : <DefaultButton> Book </DefaultButton> }
       </BottomDiv>
     </Content>
   );

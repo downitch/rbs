@@ -129,7 +129,6 @@ const Create = () => {
         return 0;
       });
       const lid = arr[arr.length - 1].id;
-      console.log(lid);
       window.localStorage.setItem('rooms', JSON.stringify([{id: lid + 1, name: number, price: price, cap: cap, date: date, time: time}, ...arr.reverse()]));
       window.location.href = '/';
     }
@@ -167,7 +166,7 @@ const Create = () => {
           </InputBox>
           <hr style={{ width: "65%", marginTop: "20px" }} />
           <InputButton onClick={ handleSubmit }>
-            Create
+            Submit
           </InputButton>
           <Link to="/">Back</Link>
         </CreateWindow>
