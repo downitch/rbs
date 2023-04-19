@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { checkIfStaffMember, checkIfAuthorized, logout } from '../../misc/helpers.js';
+
 const HeaderWrap = styled.div`
     width: 100%;
     height: 60px;
@@ -28,22 +30,6 @@ const LogoutButton = styled.p`
 `;
 
 const Header = () => {
-  const checkIfAuthorized = () => {
-    if (window.localStorage.getItem('rbs_login_hash') != null) return true;
-    return false;
-  };
-
-  const checkIfStaffMember = () => {
-    if (window.localStorage.getItem('rbs_role_hash') === 'staff') return true;
-    return false;
-  };
-
-  const logout = () => {
-    window.localStorage.removeItem('rbs_login_hash');
-    window.localStorage.removeItem('rbs_role_hash');
-    window.location.reload(false);
-  }
-
   return (
     <HeaderWrap>
       <HeaderContent>

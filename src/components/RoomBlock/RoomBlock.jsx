@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Content from '../Content/Content.jsx';
+import { checkIfStaffMember } from '../../misc/helpers.js';
 
 const AvailableList = styled.table`
     width: 100%;
@@ -47,11 +48,6 @@ const DefaultButton = styled.div`
 `;
 
 const RoomBlock = ({ name, price, cap, date, time }) => {
-  const checkIfStaffMember = () => {
-    if (window.localStorage.getItem('rbs_role_hash') === 'staff') return true;
-    return false;
-  };
-
   return (
     <Content>
       <AvailableList>
