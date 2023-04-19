@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import Header from '../Header/Header.jsx';
 import ContenTitle from '../ContentTitle/ContentTitle.jsx';
-import { authUser } from '../../misc/helpers.js';
 
 const Wrap = styled.div`
     width: 100vw;
@@ -139,6 +138,12 @@ const Login = () => {
   
   const switchRoleClickRight = () => {
     if(active) switchRoleClick();
+  };
+
+  const authUser = () => {
+    window.localStorage.setItem('rbs_login_hash', 'login_hash');
+    window.localStorage.setItem('rbs_role_hash', (active ? 'student' : 'staff'));
+    window.location.reload(false);
   };
 
   return (

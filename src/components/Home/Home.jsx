@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import Header from '../Header/Header.jsx';
@@ -26,16 +26,27 @@ const Block = styled.div`
 `;
 
 const Home = () => {
+
+  const [data, setData] = useState(null);
+
+  const randomizePrice = () => {
+    return Math.floor(Math.random() * 14) + 10;
+  }
+
+  useEffect(() => {
+    setData([
+      {name: "Name of the Room", price: randomizePrice(), cap: 12, date: "22.04.2023", time: "10:00-11:00"},
+      {name: "Name of the Room", price: randomizePrice(), cap: 12, date: "22.04.2023", time: "10:00-11:00"},
+      {name: "Name of the Room", price: randomizePrice(), cap: 12, date: "22.04.2023", time: "10:00-11:00"}
+    ]);
+  }, []);
+
   return (
     <Wrap>
       <Header />
       <Block>
         <ContenTitle name={ checkIfStaffMember() ? "My Rooms" : "Available Rooms" } />
-        <RoomBlock name="Name of the Room" price="0" cap="12" date="22.04.2023" time="10:00-11:00" />
-        <RoomBlock name="Name of the Room" price="0" cap="12" date="22.04.2023" time="10:00-11:00" />
-        <RoomBlock name="Name of the Room" price="0" cap="12" date="22.04.2023" time="10:00-11:00" />
-        <RoomBlock name="Name of the Room" price="0" cap="12" date="22.04.2023" time="10:00-11:00" />
-        <RoomBlock name="Name of the Room" price="0" cap="12" date="22.04.2023" time="10:00-11:00" />
+        { data && data.map(d => <RoomBlock name={d.name} price={d.price} cap={d.cap} date={d.date} time={d.time} />)}
       </Block>
     </Wrap>
   );

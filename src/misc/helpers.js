@@ -8,12 +8,6 @@ export const checkIfAuthorized = () => {
   return false;
 };
 
-export const authUser = () => {
-  window.localStorage.setItem('rbs_login_hash', 'login_hash');
-  window.localStorage.setItem('rbs_role_hash', (active ? 'student' : 'staff'));
-  window.location.reload(false);
-};
-
 export const logout = () => {
   window.localStorage.removeItem('rbs_login_hash');
   window.localStorage.removeItem('rbs_role_hash');
