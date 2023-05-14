@@ -127,6 +127,11 @@ const InputButton = styled.div`
 const Login = () => {
 
   const [active, setActive] = useState(true);
+  const [username, setUsername] = useState(null);
+
+  const handleInput = e => {
+    setUsername(e.target.value);
+  }
 
   const switchRoleClick = () => {
     setActive(!active);
@@ -145,16 +150,16 @@ const Login = () => {
   }
 
   const rooms = [
-    {id: 3, name: "A2.1.02", price: randomizePrice(), cap: 10, date: "30/04/2023", time: "10AM-11AM"},
-    {id: 2, name: "B4.4.15", price: randomizePrice(), cap: 36, date: "28/04/2023", time: "11AM-12PM"},
-    {id: 1, name: "CB1.2.03", price: randomizePrice(), cap: 7, date: "20/04/2023", time: "11AM-12PM"}
+    {id: 3, name: "A2.1.02", price: randomizePrice(), cap: 10, date: "30/04/2023", time: "10AM-11AM", booked: false, bookedBy: null, promo: null},
+    {id: 2, name: "B4.4.15", price: randomizePrice(), cap: 36, date: "28/04/2023", time: "11AM-12PM", booked: false, bookedBy: null, promo: null},
+    {id: 1, name: "CB1.2.03", price: randomizePrice(), cap: 7, date: "20/04/2023", time: "11AM-12PM", booked: false, bookedBy: null, promo: null}
   ];
 
   const authUser = () => {
-    window.localStorage.setItem('rbs_login_hash', 'login_hash');
+    window.localStorage.setItem('rbs_login_hash', username || 'login_hash');
     window.localStorage.setItem('rbs_role_hash', (active ? 'student' : 'staff'));
-    console.log(window.localStorage.getItem('rooms'));
-    if(!window.localStorage.getItem('rooms') || (window.localStorage.getItem('rooms') && window.localStorage.getItem('rooms') == '[]')) window.localStorage.setItem('rooms', JSON.stringify(rooms));
+    if(!window.localStorage.getItem('rooms') || (window.localStorage.getItem('rooms') && window.localStorage.getItem('rooms') === '[]')) window.localStorage.setItem('rooms', JSON.stringify(rooms));
+    if(!window.localStorage.getItem('booked') || (window.localStorage.getItem('booked') && window.localStorage.getItem('booked') === '[]')) window.localStorage.setItem('booked', JSON.stringify([]));
     window.location.href = '/';
   };
 
@@ -176,7 +181,7 @@ const Login = () => {
             <InputHeader>
               Username:
             </InputHeader>
-            <InputInteractive placeholder='username' />
+            <InputInteractive placeholder='username' onChange={ handleInput } />
           </InputBlock>
           <InputBlock>
             <InputHeader>

@@ -96,7 +96,7 @@ const Create = () => {
 
   useEffect(() => {
     const id = window.location.href.split('/').reverse()[0];
-    const room = JSON.parse(window.localStorage.getItem('rooms')).filter(e => e.id == id)[0];
+    const room = JSON.parse(window.localStorage.getItem('rooms')).filter(e => e.id === id)[0];
     setNumber(room.name);
     setPrice(room.price);
     setCap(room.cap);
@@ -130,17 +130,18 @@ const Create = () => {
   }
 
   const handleSubmit = () => {
-    if (number != '' && price > 0 && date && time) {
+    if (number !== '' && price > 0 && date && time) {
       const id = window.location.href.split('/').reverse()[0];
       const arr = JSON.parse(window.localStorage.getItem('rooms'));
       for (let i = 0; i < arr.length; i++) {
-        if(arr[i].id == id) {
+        if(arr[i].id === id) {
           arr[i].name = number;
           arr[i].price = price;
           arr[i].cap = cap;
           arr[i].date = date;
           arr[i].time = time;
           arr[i].promo = promo;
+          break;
         }
       }
       window.localStorage.setItem('rooms', JSON.stringify(arr));

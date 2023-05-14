@@ -119,7 +119,7 @@ const Create = () => {
   }
 
   const handleSubmit = () => {
-    if(number != '' && price > 0 && date && time) {
+    if(number !== '' && price > 0 && date && time) {
       const arr = JSON.parse(window.localStorage.getItem('rooms'));
       arr.sort(function(a, b) {
         const keyA = a.id;
@@ -129,7 +129,7 @@ const Create = () => {
         return 0;
       });
       const lid = arr[arr.length - 1].id;
-      window.localStorage.setItem('rooms', JSON.stringify([{id: lid + 1, name: number, price: price, cap: cap, date: date, time: time}, ...arr.reverse()]));
+      window.localStorage.setItem('rooms', JSON.stringify([{id: lid + 1, name: number, price: price, cap: cap, date: date, time: time, booked: false, bookedBy: null, promo: promo}, ...arr.reverse()]));
       window.location.href = '/';
     }
   }
