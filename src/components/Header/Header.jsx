@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { checkIfStaffMember, checkIfAuthorized, logout } from '../../misc/helpers.js';
@@ -30,11 +30,17 @@ const LogoutButton = styled.p`
 `;
 
 const Header = () => {
+  const [username, setUsername] = useState(null);
+
+  useEffect(() => {
+    setUsername(window.localStorage.getItem('rbs_login_hash'));
+  }, []);
+
   return (
     <HeaderWrap>
       <HeaderContent>
         <p>UOW Room Booking System</p>
-        <LogoutButton onClick={ logout }>{checkIfAuthorized() ? (checkIfStaffMember() ? `Staff` : `Student`) : ''}</LogoutButton>
+        <LogoutButton onClick={ logout }>{checkIfAuthorized() ? (checkIfStaffMember() ? `Staff ${ username != 'login_hash' ? '(' + username + ')' : '' }` : `Student ${ username != 'login_hash' ? '(' + username + ')' : '' }`) : ''}</LogoutButton>
       </HeaderContent>
     </HeaderWrap>
   );

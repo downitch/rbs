@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -37,19 +37,30 @@ const InputBox = styled.div`
     width: 70%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
 `;
 
 const InputTitle = styled.h3`
     color: #001641;
+    flex: 1;
+`;
+
+const ValidationBlock = styled.div`
+  margin-top: 30px;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
 `;
 
 const InputInteractive = styled.input`
   background: #989898;
   border: none;
   padding: 5px 2%;
-  width: 60%;
+  width: 100%;
   font-size: 14pt;
   color: white;
   border-radius: 3px;
@@ -85,14 +96,26 @@ const InputButton = styled.div`
   margin-bottom: 20px;
 `;
 
+const ErrorMsg = styled.span`
+  color: red;
+  font-size: 7pt;
+`;
+
 const Create = () => {
 
-  const [number, setNumber] = useState('');
-  const [price, setPrice] = useState(0);
-  const [cap, setCap] = useState(1);
+  const [number, setNumber] = useState(null);
+  const [price, setPrice] = useState(null);
+  const [cap, setCap] = useState(null);
   const [date, setDate] = useState(null);
   const [time, setTime] = useState(null);
-  const [promo, setPromo] = useState('');
+  const [promo, setPromo] = useState(null);
+
+  const [numberErr, setNumberErr] = useState('none');
+  const [priceErr, setPriceErr] = useState('none');
+  const [capErr, setCapErr] = useState('none');
+  const [dateErr, setDateErr] = useState('none');
+  const [timeErr, setTimeErr] = useState('none');
+  const [promoErr, setPromoErr] = useState('none');
 
   const handleNumber = e => {
     setNumber(e.target.value);
@@ -118,8 +141,21 @@ const Create = () => {
     setPromo(e.target.value);
   }
 
+  const validateDate = (inpt) => {
+    const arr = inpt.split('/');
+    if(new Date(`${arr[1]}/${arr[0]}/${arr[2]}`) == 'Invalid Date') return false;
+    return true;
+  }
+
   const handleSubmit = () => {
-    if(number !== '' && price > 0 && date && time) {
+    if(!validateDate(date)) {
+      setDateErr('block');
+      return;
+    } else {
+      setDateErr('none');
+    }
+
+    if(number != '' && price > 0 && date && time) {
       const arr = JSON.parse(window.localStorage.getItem('rooms'));
       arr.sort(function(a, b) {
         const keyA = a.id;
@@ -142,31 +178,49 @@ const Create = () => {
         <CreateWindow>
           <InputBox>
             <InputTitle>Room No.: </InputTitle>
-            <InputInteractive type="text" onChange={ handleNumber } />
+            <ValidationBlock>
+              <InputInteractive type="text" onChange={handleNumber} value={number} />
+              <ErrorMsg style={{ display: numberErr }}>Room input is incorrect</ErrorMsg>
+            </ValidationBlock>
           </InputBox>
           <InputBox>
             <InputTitle>Price/hr: </InputTitle>
-            <InputInteractive type="text" onChange={ handlePrice } />
+            <ValidationBlock>
+              <InputInteractive type="text" onChange={handlePrice} value={price} />
+              <ErrorMsg style={{ display: priceErr }}>Price/hr input is incorrect</ErrorMsg>
+            </ValidationBlock>
           </InputBox>
           <InputBox>
             <InputTitle>Capacity: </InputTitle>
-            <InputInteractive type="text" onChange={ handleCap } />
+            <ValidationBlock>
+              <InputInteractive type="text" onChange={handleCap} value={cap} />
+              <ErrorMsg style={{ display: capErr }}>Capacity input is incorrect</ErrorMsg>
+            </ValidationBlock>
           </InputBox>
           <InputBox>
             <InputTitle>Date: </InputTitle>
-            <InputInteractive type="text" placeholder="DD/MM/YYYY" onChange={ handleDate } />
+            <ValidationBlock>
+              <InputInteractive type="text" placeholder="DD/MM/YYYY" onChange={handleDate} value={date} />
+              <ErrorMsg style={{ display: dateErr }}>Date input is incorrect</ErrorMsg>
+            </ValidationBlock>
           </InputBox>
           <InputBox>
             <InputTitle>Timeslot: </InputTitle>
-            <InputInteractive type="text" placeholder="HH AM/PM - HH AM/PM" onChange={ handleTime } />
+            <ValidationBlock>
+              <InputInteractive type="text" placeholder="HH AM/PM - HH AM/PM" onChange={handleTime} value={time} />
+              <ErrorMsg style={{ display: timeErr }}>Timeslot input is incorrect</ErrorMsg>
+            </ValidationBlock>
           </InputBox>
           <InputBox>
             <InputTitle>Promocode: </InputTitle>
-            <InputInteractive type="text" onChange={ handlePromo } />
+            <ValidationBlock>
+              <InputInteractive type="text" onChange={handlePromo} value={promo} />
+              <ErrorMsg style={{ display: promoErr }}>Promocode input is incorrect</ErrorMsg>
+            </ValidationBlock>
           </InputBox>
           <hr style={{ width: "65%", marginTop: "20px" }} />
-          <InputButton onClick={ handleSubmit }>
-            Submit
+          <InputButton onClick={handleSubmit}>
+            Save
           </InputButton>
           <Link to="/">Back</Link>
         </CreateWindow>

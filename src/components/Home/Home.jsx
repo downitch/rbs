@@ -64,7 +64,6 @@ const Home = () => {
         <HeaderBlock>
           <ContenTitle name={ checkIfStaffMember() ? "My Rooms" : "Available Rooms" } />
           { checkIfStaffMember() && <HeaderLink to="/create">Create</HeaderLink> }
-          { !checkIfStaffMember() && <><HeaderLink to="/" onClick={ changeType }>Listed</HeaderLink>&nbsp;&nbsp;|&nbsp;&nbsp;<HeaderLink to="/" onClick={ changeType }>Booked</HeaderLink></> }
         </HeaderBlock>
         { data && data.map(d => <RoomBlock id={d.id} name={d.name} price={d.price} cap={d.cap} date={d.date} time={d.time} booked={d.booked} bookedBy={d.bookedBy} />)}
       </Block>

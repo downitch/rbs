@@ -158,8 +158,7 @@ const Login = () => {
   const authUser = () => {
     window.localStorage.setItem('rbs_login_hash', username || 'login_hash');
     window.localStorage.setItem('rbs_role_hash', (active ? 'student' : 'staff'));
-    if(!window.localStorage.getItem('rooms') || (window.localStorage.getItem('rooms') && window.localStorage.getItem('rooms') === '[]')) window.localStorage.setItem('rooms', JSON.stringify(rooms));
-    if(!window.localStorage.getItem('booked') || (window.localStorage.getItem('booked') && window.localStorage.getItem('booked') === '[]')) window.localStorage.setItem('booked', JSON.stringify([]));
+    if(!window.localStorage.getItem('rooms') || (window.localStorage.getItem('rooms') && window.localStorage.getItem('rooms') == '[]')) window.localStorage.setItem('rooms', JSON.stringify(rooms));
     window.location.href = '/';
   };
 
@@ -187,7 +186,7 @@ const Login = () => {
             <InputHeader>
               Password:
             </InputHeader>
-            <InputInteractive placeholder='password' />
+            <InputInteractive placeholder='password' type='password' />
           </InputBlock>
           <InputBlock>
             <InputButton onClick={ authUser }>
