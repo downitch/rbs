@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 import { checkIfStaffMember, checkIfAuthorized, logout } from '../../misc/helpers.js';
 
+import logo from './logo.svg';
+
 const HeaderWrap = styled.div`
     width: 100%;
     height: 60px;
@@ -39,7 +41,7 @@ const Header = () => {
   return (
     <HeaderWrap>
       <HeaderContent>
-        <p>UOW Room Booking System</p>
+        <img src={logo} alt="logo" style={{ height: '50px', paddingTop: '5px' }} />
         <LogoutButton onClick={ logout }>{checkIfAuthorized() ? (checkIfStaffMember() ? `Staff ${ username != 'login_hash' ? '(' + username + ')' : '' }` : `Student ${ username != 'login_hash' ? '(' + username + ')' : '' }`) : ''}</LogoutButton>
       </HeaderContent>
     </HeaderWrap>
