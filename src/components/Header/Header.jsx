@@ -31,6 +31,13 @@ const LogoutButton = styled.p`
   cursor: pointer;
 `;
 
+const LeftSide = styled.div`
+  display: flex;
+  flex-direciton: row;
+  justify-content: center;
+  align-items: flex-start;
+`;
+
 const Header = () => {
   const [username, setUsername] = useState(null);
 
@@ -41,7 +48,10 @@ const Header = () => {
   return (
     <HeaderWrap>
       <HeaderContent>
-        <img src={logo} alt="logo" style={{ height: '50px', paddingTop: '5px' }} />
+        <LeftSide>
+          <img src={logo} alt="logo" style={{ height: '50px', paddingTop: '5px' }} />
+          <p style={{ marginLeft: '20px', fontWeight: 'bold' }}>Room Booking System</p>
+        </LeftSide>
         <LogoutButton onClick={ logout }>{checkIfAuthorized() ? (checkIfStaffMember() ? `Staff ${ username != 'login_hash' ? '(' + username + ')' : '' }` : `Student ${ username != 'login_hash' ? '(' + username + ')' : '' }`) : ''}</LogoutButton>
       </HeaderContent>
     </HeaderWrap>

@@ -166,7 +166,7 @@ const Login = () => {
     <Wrap>
       <Header />
       <Block>
-        <ContenTitle name="Login Page" />
+        <ContenTitle name="RBS Log in" />
         <LoginWindow>
           <SwitchRole>
             <LeftRole active={{ active }} onClick={ switchRoleClickLeft }>
