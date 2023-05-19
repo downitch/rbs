@@ -110,6 +110,8 @@ const Edit = () => {
   const [time, setTime] = useState(null);
   const [promo, setPromo] = useState('');
 
+  const [canEdit, setCanEdit] = useState(true);
+
   const [numberErr, setNumberErr] = useState('none');
   const [priceErr, setPriceErr] = useState('none');
   const [capErr, setCapErr] = useState('none');
@@ -187,6 +189,16 @@ const Edit = () => {
     }
   }
 
+  const handleRole = () => {
+    const role = window.localStorage.getItem('rbs_role_hash');
+    if(role == 'student') return true;
+    return false;
+  }
+
+  useEffect(() => {
+    setCanEdit(handleRole());
+  }, []);
+
   return (
     <Wrap>
       <Header />
@@ -196,28 +208,28 @@ const Edit = () => {
           <InputBox>
             <InputTitle>Room No.: </InputTitle>
             <ValidationBlock>
-              <InputInteractive type="text" onChange={handleNumber} value={number} />
+              <InputInteractive type="text" onChange={handleNumber} value={number} readOnly={ canEdit } />
               <ErrorMsg style={{ display: numberErr }}>Room input is incorrect</ErrorMsg>
             </ValidationBlock>
           </InputBox>
           <InputBox>
             <InputTitle>Price/hr: </InputTitle>
             <ValidationBlock>
-              <InputInteractive type="text" onChange={handlePrice} value={price} />
+              <InputInteractive type="text" onChange={handlePrice} value={price} readOnly={ canEdit } />
               <ErrorMsg style={{ display: priceErr }}>Price/hr input is incorrect</ErrorMsg>
             </ValidationBlock>
           </InputBox>
           <InputBox>
             <InputTitle>Capacity: </InputTitle>
             <ValidationBlock>
-              <InputInteractive type="text" onChange={handleCap} value={cap} />
+              <InputInteractive type="text" onChange={handleCap} value={cap} readOnly={ canEdit } />
               <ErrorMsg style={{ display: capErr }}>Capacity input is incorrect</ErrorMsg>
             </ValidationBlock>
           </InputBox>
           <InputBox>
             <InputTitle>Date: </InputTitle>
             <ValidationBlock>
-              <InputInteractive type="text" placeholder="DD/MM/YYYY" onChange={handleDate} value={date} />
+              <InputInteractive type="text" placeholder="DD/MM/YYYY" onChange={handleDate} value={date} readOnly={ canEdit } />
               <ErrorMsg style={{ display: dateErr }}>Date input is incorrect</ErrorMsg>
             </ValidationBlock>
           </InputBox>
@@ -228,10 +240,10 @@ const Edit = () => {
               <ErrorMsg style={{ display: timeErr }}>Timeslot input is incorrect</ErrorMsg>
             </ValidationBlock>
           </InputBox>
-          <InputBox>
+          <InputBox display={ canEdit ? 'block' : 'none' }>
             <InputTitle>Promocode: </InputTitle>
             <ValidationBlock>
-              <InputInteractive type="text" onChange={handlePromo} value={promo} />
+              <InputInteractive type="text" onChange={handlePromo} value={promo} readOnly={ canEdit } />
               <ErrorMsg style={{ display: promoErr }}>Promocode input is incorrect</ErrorMsg>
             </ValidationBlock>
           </InputBox>

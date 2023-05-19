@@ -107,7 +107,7 @@ const RoomBlock = ({ id, name, price, cap, date, time, booked, bookedBy }) => {
         </TableTR>
       </AvailableList>
       <BottomDiv>
-      { checkIfStaffMember() ? <><DefaultButton onClick={ () => editRoom(id) }> Edit </DefaultButton><DefaultButton onClick={ () => removeRoom(id) } > Remove </DefaultButton></> : booked ? bookedBy == window.localStorage.getItem('rbs_login_hash') ? <DefaultButton onClick={ () => cancelBooking(id) }> Cancel Booking </DefaultButton> : <DefaultButton> Already Booked </DefaultButton> : <DefaultButton onClick={ () => bookRoom(id) }> Book </DefaultButton> }
+      { checkIfStaffMember() ? <><DefaultButton onClick={ () => editRoom(id) }> Edit </DefaultButton><DefaultButton onClick={ () => removeRoom(id) } > Remove </DefaultButton></> : booked ? bookedBy == window.localStorage.getItem('rbs_login_hash') ? <><DefaultButton onClick={ () => cancelBooking(id) }> Cancel Booking </DefaultButton><DefaultButton onClick={ () => editRoom(id) }> Edit Booking </DefaultButton></> : <DefaultButton> Already Booked </DefaultButton> : <DefaultButton onClick={ () => bookRoom(id) }> Book </DefaultButton> }
       </BottomDiv>
     </Content>
   );
